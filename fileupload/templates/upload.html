@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Archivo</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 20px; 
+        }
+        .top-right-buttons {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 10%;
+            margin-bottom: 20px;
+        }
+        form { 
+            margin-top: 20px; 
+        }
+        button { 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            cursor: pointer; 
+            border-radius: 5px; 
+            margin: 5px;
+        }
+        button:hover { 
+            background-color: #0056b3; 
+        }
+        .history-btn {
+            background-color: #28a745;
+        }
+        .history-btn:hover {
+            background-color: #218838;
+        }
+        .home-btn {
+            background-color: #dc3545;
+        }
+        .home-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor de botones alineados a la derecha -->
+    <div class="top-right-buttons">
+        <a href="{% url 'index' %}">
+            <button class="home-btn">Volver al Inicio</button>
+        </a>
+        <a href="{% url 'history' %}">
+            <button class="history-btn">Ver Historial</button>
+        </a>
+    </div>
+
+    <h1>Subir Archivo para Validación</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Validar</button>
+    </form>
+
+    {% if errors %}
+        <h3>Errores:</h3>
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if success_message %}
+        <p style="color: green; font-weight: bold;">{{ success_message }}</p>
+    {% endif %}
+
+</body>
+</html>

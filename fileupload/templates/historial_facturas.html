@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Facturas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+        table { width: 90%; margin: auto; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background-color: #007bff; color: white; }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Histórico de Facturas Validadas</h1>
+    
+    {% if facturas %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre del Archivo</th>
+            <th>Número de Páginas</th>
+            <th>CUFE</th>
+            <th>Peso (KB)</th>
+            <th>Fecha de Validación</th>
+        </tr>
+        {% for factura in facturas %}
+        <tr>
+            <td>{{ factura.id }}</td>
+            <td>{{ factura.file_name }}</td>
+            <td>{{ factura.numero_paginas }}</td>
+            <td>{{ factura.cufe }}</td>
+            <td>{{ factura.peso_kb|floatformat:2 }}</td>
+            <td>{{ factura.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No hay facturas validadas aún.</p>
+    {% endif %}
+
+    <a href="/" class="btn">Volver al Inicio</a>
+</body>
+</html>

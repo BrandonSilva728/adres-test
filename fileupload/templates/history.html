@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Validaciones</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 20px; 
+        }
+        .top-right-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            padding-right: 10%;
+        }
+        table { 
+            width: 80%; 
+            margin: auto; 
+            border-collapse: collapse; 
+        }
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 10px; 
+        }
+        th { 
+            background-color: #007bff; 
+            color: white; 
+        }
+        button { 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            cursor: pointer; 
+            border-radius: 5px; 
+            margin: 5px;
+        }
+        button:hover { 
+            background-color: #0056b3; 
+        }
+    </style>
+</head>
+<body>
+    <div class="top-right-buttons">
+        <a href="{% url 'upload_file' %}">
+            <button>Volver</button>
+        </a>
+    </div>
+
+    <h1>Historial de Validaciones</h1>
+    
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre del Archivo</th>
+            <th>Resultado</th>
+            <th>Fecha</th>
+        </tr>
+        {% for validation in validations %}
+        <tr>
+            <td>{{ validation.id }}</td>
+            <td>{{ validation.file_name }}</td>
+            <td>{{ validation.result }}</td>
+            <td>{{ validation.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

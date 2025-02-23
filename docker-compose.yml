@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    container_name: django_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    environment:
+      - DEBUG=True
+
+  db:
+    image: busybox  # Usa un contenedor ligero para SQLite
+    container_name: sqlite_db
+    volumes:
+      - ./db:/root/db
